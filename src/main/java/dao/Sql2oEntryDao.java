@@ -51,4 +51,13 @@ public class Sql2oEntryDao implements EntryDao {
             System.out.println(ex);
         }
     }
+
+    @Override
+    public Entry findById(int id) {
+        try(Connection con = sql2o.open()){
+            return con.createQuery("SELECT * FROM entry where id = :id")
+                    .addParameter("id", id)
+                    .executeAndFetchFirst(Entry.class);
+        }
+    }
 }
