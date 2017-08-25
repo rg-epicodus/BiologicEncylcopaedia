@@ -46,6 +46,7 @@ GRAIL Biologic Encyclopaedia offers a few key features:
 </code></pre>
 
 * Let's retrieve them. Open a new Postman tab, and:
+![ScreenShot](/screenshot03.gif)
 ![ScreenShot](/screenshot.gif)
 * Set the type to GET, Point the URL to localhost:4567/restaurants
 * Hit Send!
