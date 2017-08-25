@@ -9,11 +9,11 @@ public interface EntryDao {
 
     //create
     void add(Entry entry);
+    //void addEntryToKingdom(Kingdom kingdom, Entry entry);
 
     //read
     List<Entry> getAll();
     Entry findById(int id);
-//    List<Kingdom> getAllKingdomsForAnEntry(int id);
 
     //update
 
