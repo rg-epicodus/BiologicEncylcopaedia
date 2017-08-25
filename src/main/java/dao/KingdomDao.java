@@ -18,6 +18,6 @@ public interface KingdomDao {
 //    void update(int id, String newKingdom);
 
     //Destroy
-//    void deleteById(int id);
+    void deleteById(int id);
 //    void clearAllKingdoms();
 }

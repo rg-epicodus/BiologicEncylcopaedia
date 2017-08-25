@@ -35,4 +35,20 @@ public class Sql2oKingdomDao implements KingdomDao {
                     .executeAndFetch(Kingdom.class);
         }
     }
+
+    @Override
+    public void deleteById(int id) {
+        String sql = "DELETE from kingdom WHERE id = :id";
+//        String deletejoin = "DELETE from kingdom_entry WHERE kingdomid = :kingdomId";
+        try (Connection con = sql2o.open()){
+            con.createQuery(sql)
+                    .addParameter("id", id)
+                    .executeUpdate();
+//            con.createQuery(deletejoin)
+//                    .addParameter("kigndomId", id)
+//                    .executeUpdate();
+        } catch (Sql2oException ex){
+            System.out.println(ex);
+        }
+    }
 }
