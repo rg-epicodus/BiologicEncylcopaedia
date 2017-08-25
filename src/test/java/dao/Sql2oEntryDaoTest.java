@@ -37,6 +37,14 @@ public class Sql2oEntryDaoTest {
         assertNotEquals(originalEntryId,testEntry.getId());
     }
 
+    @Test
+    public void addedEntriesAreReturnedFromGetAll() throws Exception {
+        Entry testEntry = setupNewEntry();
+        entryDao.add(testEntry);
+        assertEquals(1, entryDao.getAll().size());
+    }
+
+
     // helpers
     public Entry setupNewEntry(){
         return new Entry("chicken");
