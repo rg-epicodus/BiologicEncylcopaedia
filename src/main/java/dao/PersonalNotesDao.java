@@ -10,7 +10,7 @@ public interface PersonalNotesDao {
     void add (PersonalNotes personalNotes);
 
     //read
-//    PersonalNotes findById(int id);
+    PersonalNotes findById(int id);
 //    List<PersonalNotes> getAllPersonalNotesByEntry(int entryId);
 
     //update

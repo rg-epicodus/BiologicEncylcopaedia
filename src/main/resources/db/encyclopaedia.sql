@@ -10,6 +10,13 @@ CREATE TABLE IF NOT EXISTS entry (
  commonName VARCHAR,
 );
 
+CREATE TABLE IF NOT EXISTS personalNotes (
+ id int PRIMARY KEY auto_increment,
+ writtenBy VARCHAR,
+ entryid INTEGER,
+ content VARCHAR,
+);
+
 CREATE TABLE IF NOT EXISTS kingdom_entry (
  id int PRIMARY KEY auto_increment,
  kingdomid INTEGER,
