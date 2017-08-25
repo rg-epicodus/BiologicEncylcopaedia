@@ -12,7 +12,7 @@ public interface KingdomDao {
 
     //Read
     List<Kingdom> getAll();
-//    Kingdom findById(int id);
+    Kingdom findById(int id);
 
     //Update
 //    void update(int id, String newKingdom);

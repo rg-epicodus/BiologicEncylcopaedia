@@ -51,4 +51,13 @@ public class Sql2oKingdomDao implements KingdomDao {
             System.out.println(ex);
         }
     }
+
+    @Override
+    public Kingdom findById(int id) {
+        try (Connection con = sql2o.open()) {
+            return con.createQuery("SELECT * FROM kingdom WHERE id = :id")
+                    .addParameter("id", id)
+                    .executeAndFetchFirst(Kingdom.class);
+        }
+    }
 }
