@@ -25,6 +25,7 @@ GRAIL Biologic Encyclopaedia offers a few key features:
 * Select the radio button marked "raw", and the type to " JSON application/json" in the dropdown menu.
 * Select the Body radio button, and copy in JSON below.
 
+<pre><code>
   }
     "commonName": "Chicken",
     "kingdom":"Animalia",
@@ -42,7 +43,7 @@ GRAIL Biologic Encyclopaedia offers a few key features:
     "notes": "I saw this on a farm",
     "image": "chicken.jpg"
   }
-
+</code></pre>
 
 * Let's retrieve them. Open a new Postman tab, and:
 ![ScreenShot](screenshot02.jpg)
