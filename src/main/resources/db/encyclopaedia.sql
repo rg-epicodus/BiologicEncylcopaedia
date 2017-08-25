@@ -13,12 +13,13 @@ CREATE TABLE IF NOT EXISTS entry (
 CREATE TABLE IF NOT EXISTS personalNotes (
  id int PRIMARY KEY auto_increment,
  writtenBy VARCHAR,
- entryid INTEGER,
+ entryId INTEGER,
+ personalNotesId INTEGER,
  content VARCHAR,
 );
 
 CREATE TABLE IF NOT EXISTS kingdom_entry (
  id int PRIMARY KEY auto_increment,
- kingdomid INTEGER,
- entryid INTEGER
+ kingdomId INTEGER,
+ entryId INTEGER
 );

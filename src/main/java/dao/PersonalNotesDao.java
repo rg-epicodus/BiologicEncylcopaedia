@@ -11,7 +11,8 @@ public interface PersonalNotesDao {
 
     //read
     PersonalNotes findById(int id);
-//    List<PersonalNotes> getAllPersonalNotesByEntry(int entryId);
+    List<PersonalNotes> getAll();
+//    List<PersonalNotes> getAllPersonalNotesForAnEntry(int entryId);
 
     //update
 //    void update(String writtenBy, int entryId, int id, String content);

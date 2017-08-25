@@ -16,7 +16,7 @@ public class Sql2oPersonalNotesDao implements PersonalNotesDao {
 
     @Override
     public void add(PersonalNotes personalNotes){
-        String sql = "INSERT INTO personalNotes (writtenBy, entryId, content) VALUES (:writtenBy, :entryId, :content)";
+        String sql = "INSERT INTO personalNotes (writtenBy, entryId, personalNotesId, content) VALUES (:writtenBy, :entryId, :personalNotesId, :content)";
         try (Connection con = sql2o.open()){
             int id = (int) con.createQuery(sql)
                     .bind(personalNotes)
@@ -31,19 +31,30 @@ public class Sql2oPersonalNotesDao implements PersonalNotesDao {
     @Override
     public PersonalNotes findById(int id) {
         try(Connection con = sql2o.open()){
-            return con.createQuery("SELECT * FROM personalnotes WHERE id = :id")
+            return con.createQuery("SELECT * FROM personalNotes WHERE id = :id")
                     .addParameter("id", id)
                     .executeAndFetchFirst(PersonalNotes.class);
         }
     }
 
+    @Override
+    public List<PersonalNotes> getAll() {
+        try(Connection con = sql2o.open()){
+            return con.createQuery("SELECT * FROM personalNotes")
+                    .executeAndFetch(PersonalNotes.class);
+        }
+    }
+
 //    @Override
-//    public List<PersonalNotes> getAll() {
-//        try(Connection con = sql2o.open()){
-//            return con.createQuery("SELECT * FROM personalnotes")
+//    public List<PersonalNotes> getAllPersonalNotesForAnEntry(int entryId) {
+//        try(Connection con = sql2o.open()) {
+//            return con.createQuery("SELECT * FROM personalNotes WHERE entryId = :entryId")
+//                    .addParameter("entryId", entryId)
 //                    .executeAndFetch(PersonalNotes.class);
 //        }
+//
 //    }
+
 //    @Override
 //    public void deletePersonalNotesById(int id) {
 //        String sql = "DELETE from personalnotes WHERE id = :id";

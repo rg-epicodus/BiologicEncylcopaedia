@@ -4,11 +4,13 @@ public class PersonalNotes {
     private int id;
     private String writtenBy;
     private int entryId;
+    private int personalNotesId;
     private String content;
 
-    public PersonalNotes(String writtenBy, int entryId, String content) {
+    public PersonalNotes(String writtenBy, int entryId, int personalNotesId, String content) {
         this.writtenBy = writtenBy;
         this.entryId = entryId;
+        this.personalNotesId = personalNotesId;
         this.content = content;
     }
 
@@ -46,6 +48,14 @@ public class PersonalNotes {
         this.content = content;
     }
 
+    public int getPersonalNotesId() {
+        return personalNotesId;
+    }
+
+    public void setPersonalNotesId(int personalNotesId) {
+        this.personalNotesId = personalNotesId;
+    }
+
     // equals and hashcode
 
 
@@ -56,17 +66,17 @@ public class PersonalNotes {
 
         PersonalNotes that = (PersonalNotes) o;
 
-        if (id != that.id) return false;
         if (entryId != that.entryId) return false;
+        if (personalNotesId != that.personalNotesId) return false;
         if (!writtenBy.equals(that.writtenBy)) return false;
         return content.equals(that.content);
     }
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + writtenBy.hashCode();
+        int result = writtenBy.hashCode();
         result = 31 * result + entryId;
+        result = 31 * result + personalNotesId;
         result = 31 * result + content.hashCode();
         return result;
     }

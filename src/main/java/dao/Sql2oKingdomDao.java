@@ -90,7 +90,7 @@ public class Sql2oKingdomDao implements KingdomDao {
     @Override
     public List<Entry> getAllEntriesForAKingdom(int kingdomId) {
         ArrayList<Entry> entries = new ArrayList<>();
-        String joinQuery = "SELECT entryid FROM kingdom_entry WHERE kingdomid = :kingdomId";
+        String joinQuery = "SELECT entryId FROM kingdom_entry WHERE kingdomId = :kingdomId";
         try (Connection con = sql2o.open()) {
             List<Integer> allEntrysIds = con.createQuery(joinQuery)
                     .addParameter("kingdomId", kingdomId)
@@ -110,7 +110,7 @@ public class Sql2oKingdomDao implements KingdomDao {
 
     @Override
     public void addKingdomToEntry(Kingdom kingdom, Entry entry) {
-        String sql = "INSERT INTO kingdom_entry (kingdomid, entryid) VALUES (:kingdomId, :entryId)";
+        String sql = "INSERT INTO kingdom_entry (kingdomId, entryId) VALUES (:kingdomId, :entryId)";
         try(Connection con = sql2o.open()) {
             con.createQuery(sql)
                     .addParameter("kingdomId", kingdom.getId())

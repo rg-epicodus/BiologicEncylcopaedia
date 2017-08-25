@@ -1,5 +1,6 @@
 package dao;
 
+import models.Entry;
 import models.PersonalNotes;
 import org.junit.After;
 import org.junit.Before;
@@ -7,12 +8,14 @@ import org.junit.Test;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
+import java.util.Arrays;
+
 import static org.junit.Assert.*;
 
 public class Sql2oPersonalNotesDaoTest {
     private Connection conn;
-    private Sql2oPersonalNotesDao personalNotesDao;
     private Sql2oEntryDao entryDao;
+    private Sql2oPersonalNotesDao personalNotesDao;
 
     @Before
     public void setUp() throws Exception {
@@ -31,13 +34,13 @@ public class Sql2oPersonalNotesDaoTest {
     @Test
     public void addPersonalNotesSetsId() throws Exception {
         PersonalNotes testPersonalNotes = setupNewPersonalNotes();
-        int originalEntryId = testPersonalNotes.getId();
+//        int originalPersonalNotesId = testPersonalNotes.getId();
         personalNotesDao.add(testPersonalNotes);
-        assertEquals(originalEntryId, testPersonalNotes.getId());
+        assertEquals(1, testPersonalNotes.getId());
     }
 
     @Test
-    public void ExistingPersonalNotesCanBeFoundById() throws Exception {
+    public void existingPersonalNotesCanBeFoundById() throws Exception {
         PersonalNotes review = setupNewPersonalNotes();
         personalNotesDao.add(review);
         PersonalNotes foundPersonalNotes = personalNotesDao.findById(review.getId());
@@ -50,23 +53,43 @@ public class Sql2oPersonalNotesDaoTest {
         personalNotesDao.add(review);
         assertEquals(1, personalNotesDao.getAll().size());
     }
-//
+
+    @Test
+    public void noPersonalNotesReturnsEmptyList() throws Exception {
+        assertEquals(0, personalNotesDao.getAll().size());
+    }
+
+
 //    @Test
-//    public void noPersonalNotesReturnsEmptyList() throws Exception {
-//        assertEquals(0, personalNotesDao.getAll().size());
+//    public void getAllPersonalNotesForAnEntryReturnsPersonalNotesCorrectly() throws Exception {
+//        PersonalNotes testPersonalNotes  = setupNewPersonalNotes();
+//        personalNotesDao.add(testPersonalNotes);
+//        PersonalNotes otherTestPersonalNotes = setupAltPersonalNotes();
+//        personalNotesDao.add(otherTestPersonalNotes);
+//        Entry testEntry = setupEntry();
+//        entryDao.add(testEntry);
+//        PersonalNotes[] personalNotes = {testPersonalNotes, otherTestPersonalNotes};
+//        assertEquals(personalNotesDao.getAllPersonalNotesForAnEntry(testPersonalNotes.getId()), Arrays.asList(personalNotes));
 //    }
-//
-//    @Test
-//    public void deleteByIdDeletesCorrectPersonalNotes() throws Exception {
-//        PersonalNotes review = setupNewPersonalNotes();
-//        personalNotesDao.add(review);
-//        personalNotesDao.deletePersonalNotesById(review.getId());
-//        assertEquals(0, personalNotesDao.getAll().size());
-//    }
+
+    @Test
+    public void deleteByIdDeletesCorrectPersonalNotes() throws Exception {
+        PersonalNotes review = setupNewPersonalNotes();
+        personalNotesDao.add(review);
+        personalNotesDao.deletePersonalNotesById(review.getId());
+        assertEquals(0, personalNotesDao.getAll().size());
+    }
 
     //helpers
     public PersonalNotes setupNewPersonalNotes(){
-        return new PersonalNotes("Written By", 5, "Note Contents");
+        return new PersonalNotes("Written By", 5 , 4, "Note Contents");
     }
 
+    public PersonalNotes setupAltPersonalNotes(){
+        return new PersonalNotes("Not Written By", 4, 5,"Not Note Contents");
+    }
+
+    public Entry setupEntry() {
+        return new Entry ("chicken");
+    }
 }
