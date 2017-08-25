@@ -11,7 +11,7 @@ public interface KingdomDao {
     void add(Kingdom kingdom);
 
     //Read
-//    List<Kingdom> getAll();
+    List<Kingdom> getAll();
 //    Kingdom findById(int id);
 
     //Update
