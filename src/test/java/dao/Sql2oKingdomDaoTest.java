@@ -38,6 +38,13 @@ public class Sql2oKingdomDaoTest {
         assertNotEquals(originalKingdomId,testKingdom.getId());
     }
 
+    @Test
+    public void addedKindomsAreReturnedFromGetAll() throws Exception {
+        Kingdom testKingdom = setupKingdom();
+        kingdomDao.add(testKingdom);
+        assertEquals(1, kingdomDao.getAll().size());
+    }
+
     // helpers
 
     public Kingdom setupKingdom (){
