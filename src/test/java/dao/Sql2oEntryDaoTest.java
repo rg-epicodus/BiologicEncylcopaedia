@@ -66,7 +66,7 @@ public class Sql2oEntryDaoTest {
     }
 
     @Test
-    public void addEntryToKingdomAddsTypeCorrectly() throws Exception {
+    public void addEntryToKingdomAddsCorrectly() throws Exception {
 
         Kingdom testKingdom = setupKingdom();
         Kingdom altKingdom = setupAltKingdom();
@@ -81,7 +81,7 @@ public class Sql2oEntryDaoTest {
         entryDao.addEntryToKingdom(testKingdom, testEntry);
         entryDao.addEntryToKingdom(altKingdom, testEntry);
 
-        assertEquals(2, entryDao.getAllKingdomsForAEntry(testEntry.getId()).size());
+        assertEquals(2, entryDao.getAllKingdomsForAnEntry(testEntry.getId()).size());
     }
 
 

@@ -1,10 +1,12 @@
 package dao;
 
 import models.Entry;
+import models.Kingdom;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 import org.sql2o.Sql2oException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Sql2oEntryDao implements EntryDao {
@@ -59,5 +61,42 @@ public class Sql2oEntryDao implements EntryDao {
                     .addParameter("id", id)
                     .executeAndFetchFirst(Entry.class);
         }
+    }
+
+    @Override
+    public void addEntryToKingdom(Kingdom kingdom, Entry entry){
+        String sql = "INSERT INTO kingdom_entry (kingdomid, entryid) VALUES (:kingdomId, :entryId)";
+        try (Connection con = sql2o.open()) {
+            con.createQuery(sql)
+                    .addParameter("kingdomId", kingdom.getId())
+                    .addParameter("entryId", entry.getId())
+                    .executeUpdate();
+        } catch (Sql2oException ex){
+            System.out.println(ex);
+        }
+    }
+
+    @Override
+    public List<Kingdom> getAllKingdomsForAnEntry(int entryId) {
+
+        ArrayList<Kingdom> kingdoms = new ArrayList<>();
+
+        String joinQuery = "SELECT kingdomid FROM kingdom_entry WHERE entryid = :entryId";
+
+        try (Connection con = sql2o.open()) {
+            List<Integer> allKingdomIds = con.createQuery(joinQuery)
+                    .addParameter("entryId", entryId)
+                    .executeAndFetch(Integer.class);
+            for (Integer kingdomId : allKingdomIds){
+                String kingdomQuery = "SELECT * FROM kingdom WHERE id = :kingdomId";
+                kingdoms.add(
+                        con.createQuery(kingdomQuery)
+                                .addParameter("kingdomId", kingdomId)
+                                .executeAndFetchFirst(Kingdom.class));
+            }
+        } catch (Sql2oException ex){
+            System.out.println(ex);
+        }
+        return kingdoms;
     }
 }
