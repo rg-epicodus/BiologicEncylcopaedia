@@ -72,6 +72,16 @@ public class Sql2oKingdomDao implements KingdomDao {
         } catch (Sql2oException ex){
             System.out.println(ex);
         }
+    }
 
+    @Override
+    public void clearAllKingdoms() {
+        String sql = "DELETE from kingdom";
+        try (Connection con = sql2o.open()) {
+            con.createQuery(sql)
+                    .executeUpdate();
+        } catch (Sql2oException ex) {
+            System.out.println(ex);
+        }
     }
 }

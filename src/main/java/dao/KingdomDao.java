@@ -19,5 +19,5 @@ public interface KingdomDao {
 
     //Destroy
     void deleteById(int id);
-//    void clearAllKingdoms();
+    void clearAllKingdoms();
 }
