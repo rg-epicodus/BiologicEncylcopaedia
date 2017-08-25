@@ -44,6 +44,19 @@ public class Sql2oEntryDaoTest {
         assertEquals(1, entryDao.getAll().size());
     }
 
+    @Test
+    public void noEntryReturnsEmptyList() throws Exception {
+        assertEquals(0, entryDao.getAll().size());
+    }
+
+    @Test
+    public void deleteByIdDeletesCorrectEntry() throws Exception {
+        Entry foodtype = setupNewEntry();
+        entryDao.add(foodtype);
+        entryDao.deleteById(foodtype.getId());
+        assertEquals(0, entryDao.getAll().size());
+    }
+
 
     // helpers
     public Entry setupNewEntry(){
