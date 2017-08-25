@@ -8,7 +8,7 @@ import java.util.List;
 public interface EntryDao {
 
     //create
-//    void add(Entry entry);
+    void add(Entry entry);
 
     //read
 //    List<Kingdom> getAllKingdomsForAnEntry(int id);

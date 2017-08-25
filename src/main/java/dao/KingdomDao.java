@@ -10,11 +10,12 @@ public interface KingdomDao {
 
     //Create
     void add(Kingdom kingdom);
-//    void addKingdomToEntry(Kingdom kingdom, Entry entry);
+    void addKingdomToEntry(Kingdom kingdom, Entry entry);
 
     //Read
     List<Kingdom> getAll();
     Kingdom findById(int id);
+    List<Entry> getAllEntriesForAKingdom(int kingdomId);
 
     //Update
     void update(int id, String newKingdom);
