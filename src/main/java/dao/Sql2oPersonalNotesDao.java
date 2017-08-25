@@ -45,15 +45,15 @@ public class Sql2oPersonalNotesDao implements PersonalNotesDao {
         }
     }
 
-//    @Override
-//    public List<PersonalNotes> getAllPersonalNotesForAnEntry(int entryId) {
-//        try(Connection con = sql2o.open()) {
-//            return con.createQuery("SELECT * FROM personalNotes WHERE entryId = :entryId")
-//                    .addParameter("entryId", entryId)
-//                    .executeAndFetch(PersonalNotes.class);
-//        }
-//
-//    }
+    @Override
+    public List<PersonalNotes> getAllPersonalNotesForAnEntry(int entryId) {
+        try(Connection con = sql2o.open()) {
+            return con.createQuery("SELECT * FROM personalNotes WHERE entryId = :entryId")
+                    .addParameter("entryId", entryId)
+                    .executeAndFetch(PersonalNotes.class);
+        }
+
+    }
 
     @Override
     public void deletePersonalNotesById(int id) {

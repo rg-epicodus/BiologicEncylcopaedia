@@ -12,10 +12,9 @@ public interface PersonalNotesDao {
     //read
     PersonalNotes findById(int id);
     List<PersonalNotes> getAll();
-//    List<PersonalNotes> getAllPersonalNotesForAnEntry(int entryId);
+    List<PersonalNotes> getAllPersonalNotesForAnEntry(int entryId);
 
     //update
-//    void update(String writtenBy, int entryId, int id, String content);
 
     //destroy
     void deletePersonalNotesById(int id);

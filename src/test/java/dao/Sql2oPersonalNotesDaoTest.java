@@ -34,7 +34,6 @@ public class Sql2oPersonalNotesDaoTest {
     @Test
     public void addPersonalNotesSetsId() throws Exception {
         PersonalNotes testPersonalNotes = setupNewPersonalNotes();
-//        int originalPersonalNotesId = testPersonalNotes.getId();
         personalNotesDao.add(testPersonalNotes);
         assertEquals(1, testPersonalNotes.getId());
     }
@@ -67,17 +66,6 @@ public class Sql2oPersonalNotesDaoTest {
         assertEquals(0, personalNotesDao.getAll().size());
     }
 
-//    @Test
-//    public void getAllPersonalNotesForAnEntryReturnsPersonalNotesCorrectly() throws Exception {
-//        PersonalNotes testPersonalNotes  = setupNewPersonalNotes();
-//        personalNotesDao.add(testPersonalNotes);
-//        PersonalNotes otherTestPersonalNotes = setupAltPersonalNotes();
-//        personalNotesDao.add(otherTestPersonalNotes);
-//        Entry testEntry = setupEntry();
-//        entryDao.add(testEntry);
-//        PersonalNotes[] personalNotes = {testPersonalNotes, otherTestPersonalNotes};
-//        assertEquals(personalNotesDao.getAllPersonalNotesForAnEntry(testPersonalNotes.getId()), Arrays.asList(personalNotes));
-//    }
 
 
     //helpers
