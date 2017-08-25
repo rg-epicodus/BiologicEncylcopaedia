@@ -11,5 +11,6 @@ public interface EntryDao {
     void add(Entry entry);
 
     //read
+    List<Entry> getAll();
 //    List<Kingdom> getAllKingdomsForAnEntry(int id);
 }
