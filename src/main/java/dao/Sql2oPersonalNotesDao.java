@@ -55,16 +55,16 @@ public class Sql2oPersonalNotesDao implements PersonalNotesDao {
 //
 //    }
 
-//    @Override
-//    public void deletePersonalNotesById(int id) {
-//        String sql = "DELETE from personalnotes WHERE id = :id";
-//        try (Connection con = sql2o.open()) {
-//            con.createQuery(sql)
-//                    .addParameter("id", id)
-//                    .executeUpdate();
-//        } catch (Sql2oException ex){
-//            System.out.println(ex);
-//        }
-//    }
+    @Override
+    public void deletePersonalNotesById(int id) {
+        String sql = "DELETE from personalNotes WHERE id = :id";
+        try (Connection con = sql2o.open()) {
+            con.createQuery(sql)
+                    .addParameter("id", id)
+                    .executeUpdate();
+        } catch (Sql2oException ex){
+            System.out.println(ex);
+        }
+    }
 
 }

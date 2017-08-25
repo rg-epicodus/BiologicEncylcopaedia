@@ -18,5 +18,5 @@ public interface PersonalNotesDao {
 //    void update(String writtenBy, int entryId, int id, String content);
 
     //destroy
-//    void deleteById(int id);
+    void deletePersonalNotesById(int id);
 }
