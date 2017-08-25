@@ -45,6 +45,12 @@ public class Sql2oKingdomDaoTest {
         assertEquals(1, kingdomDao.getAll().size());
     }
 
+    @Test
+    public void noKingdomReturnsEmptyList() throws Exception {
+        assertEquals(0, kingdomDao.getAll().size());
+    }
+
+
     // helpers
 
     public Kingdom setupKingdom (){
