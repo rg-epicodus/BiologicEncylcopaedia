@@ -36,6 +36,33 @@ public class Sql2oPersonalNotesDaoTest {
         assertEquals(originalEntryId, testPersonalNotes.getId());
     }
 
+    @Test
+    public void ExistingPersonalNotesCanBeFoundById() throws Exception {
+        PersonalNotes review = setupNewPersonalNotes();
+        personalNotesDao.add(review);
+        PersonalNotes foundPersonalNotes = personalNotesDao.findById(review.getId());
+        assertEquals(review, foundPersonalNotes);
+    }
+
+//    @Test
+//    public void returnAllPersonalNotes() throws Exception {
+//        PersonalNotes review = setupNewPersonalNotes();
+//        personalNotesDao.add(review);
+//        assertEquals(1, personalNotesDao.getAll().size());
+//    }
+//
+//    @Test
+//    public void noPersonalNotesReturnsEmptyList() throws Exception {
+//        assertEquals(0, personalNotesDao.getAll().size());
+//    }
+//
+//    @Test
+//    public void deleteByIdDeletesCorrectPersonalNotes() throws Exception {
+//        PersonalNotes review = setupNewPersonalNotes();
+//        personalNotesDao.add(review);
+//        personalNotesDao.deletePersonalNotesById(review.getId());
+//        assertEquals(0, personalNotesDao.getAll().size());
+//    }
 
     //helpers
     public PersonalNotes setupNewPersonalNotes(){
