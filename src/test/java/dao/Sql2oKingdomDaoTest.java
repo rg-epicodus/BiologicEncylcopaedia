@@ -58,6 +58,14 @@ public class Sql2oKingdomDaoTest {
         assertEquals(0, kingdomDao.getAll().size());
     }
 
+    @Test
+    public void findById_findCorrectKindom() throws Exception {
+        Kingdom kingdom = setupKingdom();
+        kingdomDao.add(kingdom);
+        Kingdom foundKingdom = kingdomDao.findById(kingdom.getId());
+        assertEquals(kingdom, foundKingdom);
+    }
+
     // helpers
 
     public Kingdom setupKingdom (){
