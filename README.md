@@ -20,7 +20,7 @@ GRAIL Biologic Encyclopaedia offers a few key features:
 * Run app.java
 * Download Postman to run the API through for the project:
 * Set the HTTP request type to POST so we can create a record before we can read it
-![ScreenShot](screenshot01.jpg)
+![ScreenShot](/screenshot01.jpg)
 * Point the URL to localhost:4567/restaurants/new
 * Select the radio button marked "raw", and the type to " JSON application/json" in the dropdown menu.
 * Select the Body radio button, and copy in JSON below.
@@ -46,7 +46,7 @@ GRAIL Biologic Encyclopaedia offers a few key features:
 </code></pre>
 
 * Let's retrieve them. Open a new Postman tab, and:
-![ScreenShot](screenshot02.jpg)
+![ScreenShot](/screenshot02.jpg)
 * Set the type to GET, Point the URL to localhost:4567/restaurants
 * Hit Send!
 * I don't know Perry, Magnets and Science, amazing stuff here....
