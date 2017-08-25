@@ -13,4 +13,9 @@ public interface EntryDao {
     //read
     List<Entry> getAll();
 //    List<Kingdom> getAllKingdomsForAnEntry(int id);
+
+    //update
+
+    //destroy
+    void deleteById(int id);
 }

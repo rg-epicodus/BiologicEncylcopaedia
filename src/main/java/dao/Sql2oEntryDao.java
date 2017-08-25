@@ -35,4 +35,20 @@ public class Sql2oEntryDao implements EntryDao {
                     .executeAndFetch(Entry.class);
         }
     }
+
+    @Override
+    public void deleteById(int id) {
+        String sql = "DELETE from entry WHERE id=:id";
+        String joinQuery = "DELETE from kingdom_entry WHERE entryid = :entryId";
+        try (Connection con = sql2o.open()) {
+            con.createQuery(sql)
+                    .addParameter("id", id)
+                    .executeUpdate();
+            con.createQuery(joinQuery)
+                    .addParameter("entryId", id)
+                    .executeUpdate();
+        } catch (Sql2oException ex){
+            System.out.println(ex);
+        }
+    }
 }
