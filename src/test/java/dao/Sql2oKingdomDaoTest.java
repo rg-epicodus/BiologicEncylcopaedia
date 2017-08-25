@@ -75,10 +75,26 @@ public class Sql2oKingdomDaoTest {
         assertNotEquals(kingdom, updateLocation.getKingdomName());
     }
 
+    @Test
+    public void clearAllKingdomsClearsAllKingdoms() throws Exception {
+        Kingdom kingdom = setupKingdom();
+        Kingdom kingdom2 = setupKingdom2();
+        kingdomDao.add(kingdom);
+        kingdomDao.add(kingdom2);
+        int daoSize = kingdomDao.getAll().size();
+        kingdomDao.clearAllKingdoms();
+        assertTrue(daoSize > 0 && daoSize >kingdomDao.getAll().size());
+    }
+
         // helpers
 
     public Kingdom setupKingdom (){
         return new Kingdom("Animalia");
     }
+
+    public Kingdom setupKingdom2 (){
+        return new Kingdom("Plantae");
+    }
+
 
 }
