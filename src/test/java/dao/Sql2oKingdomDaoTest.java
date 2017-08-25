@@ -1,11 +1,14 @@
 package dao;
 
+import models.Entry;
 import models.Kingdom;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
+
+import java.util.Arrays;
 
 import static org.junit.Assert.*;
 
@@ -84,6 +87,20 @@ public class Sql2oKingdomDaoTest {
         int daoSize = kingdomDao.getAll().size();
         kingdomDao.clearAllKingdoms();
         assertTrue(daoSize > 0 && daoSize >kingdomDao.getAll().size());
+    }
+
+    @Test
+    public void getAllEntriesForAKingdomReturnsEntriesCorrectly() throws Exception {
+        Entry testEntry  = new Entry("entryOne");
+        entryDao.add(testEntry);
+        Entry otherEntry  = new Entry("entryTwo");
+        entryDao.add(otherEntry);
+        Kingdom testKingdom = setupKingdom();
+        kingdomDao.add(testKingdom);
+        kingdomDao.addKingdomToEntry(testKingdom,testEntry);
+        kingdomDao.addKingdomToEntry(testKingdom,otherEntry);
+        Entry[] entry = {testEntry, otherEntry};
+        assertEquals(kingdomDao.getAllEntriesForAKingdom(testKingdom.getId()), Arrays.asList(entry));
     }
 
         // helpers

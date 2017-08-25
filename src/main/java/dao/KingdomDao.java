@@ -1,6 +1,7 @@
 package dao;
 
 
+import models.Entry;
 import models.Kingdom;
 
 import java.util.List;
@@ -9,6 +10,7 @@ public interface KingdomDao {
 
     //Create
     void add(Kingdom kingdom);
+//    void addKingdomToEntry(Kingdom kingdom, Entry entry);
 
     //Read
     List<Kingdom> getAll();
