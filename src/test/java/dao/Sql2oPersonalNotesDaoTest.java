@@ -66,7 +66,15 @@ public class Sql2oPersonalNotesDaoTest {
         assertEquals(0, personalNotesDao.getAll().size());
     }
 
-
+    @Test
+    public void getAllPersonalNotesForAnEntry() throws Exception {
+        Entry testEntry = setupEntry();
+        PersonalNotes testPersonalNotes = setupNewPersonalNotes();
+        entryDao.add(testEntry);
+        personalNotesDao.add(testPersonalNotes);
+        entryDao.addEntryToPersonalNotes(testPersonalNotes, testEntry);
+        assertEquals(1, entryDao.getAllPersonalNotesForAnEntry(1).size());
+    }
 
     //helpers
     public PersonalNotes setupNewPersonalNotes(){

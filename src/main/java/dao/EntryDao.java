@@ -18,7 +18,7 @@ public interface EntryDao {
     List<Entry> getAll();
     Entry findById(int id);
     List<Kingdom> getAllKingdomsForAnEntry(int id);
-//    List<PersonalNotes> getAllPersonalNotesForAnEntry(int id);
+    List<PersonalNotes> getAllPersonalNotesForAnEntry(int id);
 
     //update
 

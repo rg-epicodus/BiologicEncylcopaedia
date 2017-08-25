@@ -18,8 +18,15 @@ CREATE TABLE IF NOT EXISTS personalNotes (
  content VARCHAR,
 );
 
-CREATE TABLE IF NOT EXISTS kingdom_entry (
+--CREATE TABLE IF NOT EXISTS kingdom_entry (
+-- id int PRIMARY KEY auto_increment,
+-- kingdomId INTEGER,
+-- entryId INTEGER
+--);
+
+CREATE TABLE IF NOT EXISTS entry_personalNotes (
  id int PRIMARY KEY auto_increment,
- kingdomId INTEGER,
- entryId INTEGER
+ kingdomName VARCHAR,
+ entryId INTEGER,
+ personalNotesId INTEGER,
 );

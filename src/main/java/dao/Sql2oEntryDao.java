@@ -114,6 +114,26 @@ public class Sql2oEntryDao implements EntryDao {
         return kingdoms;
     }
 
+    public List<PersonalNotes> getAllPersonalNotesForAnEntry(int personalNotesId){
+        ArrayList<PersonalNotes> allPersonalNotes = new ArrayList<>();
+        String getIdsSQL = "SELECT entryId FROM entry_personalNotes WHERE personalNotesId = :personalNotesId";
+        String sql = "SELECT * FROM entry WHERE id = :id";
+        try (Connection con = sql2o.open()){
+            List<Integer> entryIds = con.createQuery(getIdsSQL)
+                    .addParameter("personalNotesId", personalNotesId)
+                    .executeAndFetch(Integer.class);
+            for(Integer entryId : entryIds){
+                allPersonalNotes.add(
+                        con.createQuery(sql)
+                                .addParameter("id", entryId)
+                                .executeAndFetchFirst(PersonalNotes.class)
+                );
+            }
+        } catch (Sql2oException ex){
+            System.out.println(ex);
+        }
+        return allPersonalNotes;
+    }
 
 
 
