@@ -15,7 +15,7 @@ public interface KingdomDao {
     Kingdom findById(int id);
 
     //Update
-//    void update(int id, String newKingdom);
+    void update(int id, String newKingdom);
 
     //Destroy
     void deleteById(int id);

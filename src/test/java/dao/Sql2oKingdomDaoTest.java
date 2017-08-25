@@ -73,7 +73,7 @@ public class Sql2oKingdomDaoTest {
         kingdomDao.update(kingdom.getId(), "Plantae");
         Kingdom updateLocation = kingdomDao.findById(kingdom.getId());
         assertNotEquals(kingdom, updateLocation.getKingdomName());
-
+    }
 
         // helpers
 

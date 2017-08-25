@@ -60,4 +60,18 @@ public class Sql2oKingdomDao implements KingdomDao {
                     .executeAndFetchFirst(Kingdom.class);
         }
     }
+
+    @Override
+    public void update(int id, String kingdomName){
+        String sql = "UPDATE kingdom SET (kingdomName) = (:kingdomName) WHERE id = :id";
+        try (Connection con = sql2o.open()){
+            con.createQuery(sql)
+                    .addParameter("kingdomName", kingdomName)
+                    .addParameter("id", id)
+                    .executeUpdate();
+        } catch (Sql2oException ex){
+            System.out.println(ex);
+        }
+
+    }
 }
