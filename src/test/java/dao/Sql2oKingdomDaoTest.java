@@ -50,6 +50,13 @@ public class Sql2oKingdomDaoTest {
         assertEquals(0, kingdomDao.getAll().size());
     }
 
+    @Test
+    public void deleteByIdDeletesCorrectKingdom() throws Exception {
+        Kingdom testKingdom = setupKingdom();
+        kingdomDao.add(testKingdom);
+        kingdomDao.deleteById(testKingdom.getId());
+        assertEquals(0, kingdomDao.getAll().size());
+    }
 
     // helpers
 
