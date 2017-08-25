@@ -66,7 +66,16 @@ public class Sql2oKingdomDaoTest {
         assertEquals(kingdom, foundKingdom);
     }
 
-    // helpers
+    @Test
+    public void updateKingdomInformation() throws Exception {
+        Kingdom kingdom = setupKingdom();
+        kingdomDao.add(kingdom);
+        kingdomDao.update(kingdom.getId(), "Plantae");
+        Kingdom updateLocation = kingdomDao.findById(kingdom.getId());
+        assertNotEquals(kingdom, updateLocation.getKingdomName());
+
+
+        // helpers
 
     public Kingdom setupKingdom (){
         return new Kingdom("Animalia");
