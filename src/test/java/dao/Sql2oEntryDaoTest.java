@@ -57,6 +57,14 @@ public class Sql2oEntryDaoTest {
         assertEquals(0, entryDao.getAll().size());
     }
 
+    @Test
+    public void findById_findCorrectEntry() throws Exception {
+        Entry entry = setupNewEntry();
+        entryDao.add(entry);
+        Entry foundEntry = entryDao.findById(entry.getId());
+        assertEquals(entry, foundEntry);
+    }
+
 
     // helpers
     public Entry setupNewEntry(){
