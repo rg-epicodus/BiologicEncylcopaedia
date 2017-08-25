@@ -44,12 +44,12 @@ public class Sql2oPersonalNotesDaoTest {
         assertEquals(review, foundPersonalNotes);
     }
 
-//    @Test
-//    public void returnAllPersonalNotes() throws Exception {
-//        PersonalNotes review = setupNewPersonalNotes();
-//        personalNotesDao.add(review);
-//        assertEquals(1, personalNotesDao.getAll().size());
-//    }
+    @Test
+    public void returnAllPersonalNotes() throws Exception {
+        PersonalNotes review = setupNewPersonalNotes();
+        personalNotesDao.add(review);
+        assertEquals(1, personalNotesDao.getAll().size());
+    }
 //
 //    @Test
 //    public void noPersonalNotesReturnsEmptyList() throws Exception {
