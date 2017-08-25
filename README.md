@@ -25,23 +25,23 @@ GRAIL Biologic Encyclopaedia offers a few key features:
 * Select the radio button marked "raw", and the type to " JSON application/json" in the dropdown menu.
 * Select the Body radio button, and copy in JSON below.
 
-  `}`
-    `"commonName": "Chicken",`
-    `"kingdom":"Animalia",`
-    `"phylum":"Chordata",`
-    `"class": "Aves",`
-    `"order": "Galleformes",`
-    `"family": "Phasianidae",`
-    `"subfamily": "Phasianinae"`
-    `"genus": "Gallus",`
-    `"species": "G. gallus",`
-    `"subspecies": "G. g. domesticus",`
-    `"Trinomial Name":"Gallus gallus domesticus",`
-    `"domesticated": "true",`
-    `"yearIntroduced": "1758",`
-    `"notes": "I saw this on a farm",`
-    `"image": "chicken.jpg"`
-   }`
+  }
+    "commonName": "Chicken",
+    "kingdom":"Animalia",
+    "phylum":"Chordata",
+    "class": "Aves",
+    "order": "Galleformes",
+    "family": "Phasianidae",
+    "subfamily": "Phasianinae"
+    "genus": "Gallus",
+    "species": "G. gallus",
+    "subspecies": "G. g. domesticus",
+    "Trinomial Name":"Gallus gallus domesticus",
+    "domesticated": "true",
+    "yearIntroduced": "1758",
+    "notes": "I saw this on a farm",
+    "image": "chicken.jpg"
+  }
 
 
 * Let's retrieve them. Open a new Postman tab, and:
