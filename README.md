@@ -27,27 +27,18 @@ GRAIL Biologic Encyclopaedia offers a few key features:
 
 <pre><code>
   }
+    "kingdomName":"Animalia",
     "commonName": "Chicken",
-    "kingdom":"Animalia",
-    "phylum":"Chordata",
-    "class": "Aves",
-    "order": "Galleformes",
-    "family": "Phasianidae",
-    "subfamily": "Phasianinae"
-    "genus": "Gallus",
-    "species": "G. gallus",
-    "subspecies": "G. g. domesticus",
-    "Trinomial Name":"Gallus gallus domesticus",
-    "domesticated": "true",
-    "yearIntroduced": "1758",
-    "notes": "I saw this on a farm",
-    "image": "chicken.jpg"
+    "phylum": "Chordata",
+    "writtenBy": "Pat Boone",
+    "content": "I saw this on a farm",
   }
 </code></pre>
 
 * Let's retrieve them. Open a new Postman tab, and:
 * Set the type to GET, Point the URL to localhost:4567/restaurants
 * Hit Send!
+![ScreenShot](/screenshot01.png)
 * I don't know Perry, Magnets and Science, amazing stuff here....
 
 
