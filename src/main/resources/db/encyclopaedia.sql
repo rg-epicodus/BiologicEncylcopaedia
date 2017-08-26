@@ -1,32 +1,26 @@
 SET MODE PostgreSQL;
 
 CREATE TABLE IF NOT EXISTS kingdom (
- id int PRIMARY KEY auto_increment,
+ organismId int PRIMARY KEY auto_increment,
  kingdomName VARCHAR,
 );
 
 CREATE TABLE IF NOT EXISTS entry (
- id int PRIMARY KEY auto_increment,
+ entryId int PRIMARY KEY auto_increment,
  commonName VARCHAR,
+ phylum VARCHAR,
+ kingdomId INTEGER,
 );
 
 CREATE TABLE IF NOT EXISTS personalNotes (
  id int PRIMARY KEY auto_increment,
  writtenBy VARCHAR,
- entryId INTEGER,
- personalNotesId INTEGER,
  content VARCHAR,
 );
 
---CREATE TABLE IF NOT EXISTS kingdom_entry (
--- id int PRIMARY KEY auto_increment,
--- kingdomId INTEGER,
--- entryId INTEGER
---);
-
 CREATE TABLE IF NOT EXISTS entry_personalNotes (
  id int PRIMARY KEY auto_increment,
- kingdomName VARCHAR,
+ kingdomId INTEGER,
  entryId INTEGER,
  personalNotesId INTEGER,
 );

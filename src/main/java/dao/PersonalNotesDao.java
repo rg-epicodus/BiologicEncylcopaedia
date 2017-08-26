@@ -12,7 +12,6 @@ public interface PersonalNotesDao {
     //read
     PersonalNotes findById(int id);
     List<PersonalNotes> getAll();
-    List<PersonalNotes> getAllPersonalNotesForAnEntry(int entryId);
 
     //update
 

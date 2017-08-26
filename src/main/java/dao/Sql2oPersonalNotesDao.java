@@ -16,7 +16,7 @@ public class Sql2oPersonalNotesDao implements PersonalNotesDao {
 
     @Override
     public void add(PersonalNotes personalNotes){
-        String sql = "INSERT INTO personalNotes (writtenBy, entryId, personalNotesId, content) VALUES (:writtenBy, :entryId, :personalNotesId, :content)";
+        String sql = "INSERT INTO personalNotes (writtenBy, content) VALUES (:writtenBy, :content)";
         try (Connection con = sql2o.open()){
             int id = (int) con.createQuery(sql)
                     .bind(personalNotes)
@@ -45,15 +45,15 @@ public class Sql2oPersonalNotesDao implements PersonalNotesDao {
         }
     }
 
-    @Override
-    public List<PersonalNotes> getAllPersonalNotesForAnEntry(int entryId) {
-        try(Connection con = sql2o.open()) {
-            return con.createQuery("SELECT * FROM personalNotes WHERE entryId = :entryId")
-                    .addParameter("entryId", entryId)
-                    .executeAndFetch(PersonalNotes.class);
-        }
-
-    }
+//    @Override
+//    public List<PersonalNotes> getAllPersonalNotesForAnEntry(int entryId) {
+//        try(Connection con = sql2o.open()) {
+//            return con.createQuery("SELECT * FROM personalNotes WHERE entryId = :entryId")
+//                    .addParameter("entryId", entryId)
+//                    .executeAndFetch(PersonalNotes.class);
+//        }
+//
+//    }
 
     @Override
     public void deletePersonalNotesById(int id) {

@@ -1,28 +1,17 @@
 package models;
 
-public class PersonalNotes {
-    private int id;
+public class PersonalNotes extends Kingdom {
     private String writtenBy;
-    private int entryId;
-    private int personalNotesId;
     private String content;
+    private int id;
 
-    public PersonalNotes(String writtenBy, int entryId, int personalNotesId, String content) {
+    public PersonalNotes(String kingdomName, String writtenBy, String content) {
+        super(kingdomName);
         this.writtenBy = writtenBy;
-        this.entryId = entryId;
-        this.personalNotesId = personalNotesId;
         this.content = content;
     }
 
     // getters and setters
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getWrittenBy() {
         return writtenBy;
@@ -30,14 +19,6 @@ public class PersonalNotes {
 
     public void setWrittenBy(String writtenBy) {
         this.writtenBy = writtenBy;
-    }
-
-    public int getEntryId() {
-        return entryId;
-    }
-
-    public void setEntryId(int entryId) {
-        this.entryId = entryId;
     }
 
     public String getContent() {
@@ -48,16 +29,16 @@ public class PersonalNotes {
         this.content = content;
     }
 
-    public int getPersonalNotesId() {
-        return personalNotesId;
+    public int getId() {
+        return id;
     }
 
-    public void setPersonalNotesId(int personalNotesId) {
-        this.personalNotesId = personalNotesId;
+    public void setId(int id) {
+        this.id = id;
     }
+
 
     // equals and hashcode
-
 
     @Override
     public boolean equals(Object o) {
@@ -66,8 +47,6 @@ public class PersonalNotes {
 
         PersonalNotes that = (PersonalNotes) o;
 
-        if (entryId != that.entryId) return false;
-        if (personalNotesId != that.personalNotesId) return false;
         if (!writtenBy.equals(that.writtenBy)) return false;
         return content.equals(that.content);
     }
@@ -75,8 +54,6 @@ public class PersonalNotes {
     @Override
     public int hashCode() {
         int result = writtenBy.hashCode();
-        result = 31 * result + entryId;
-        result = 31 * result + personalNotesId;
         result = 31 * result + content.hashCode();
         return result;
     }

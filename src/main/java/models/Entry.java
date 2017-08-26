@@ -1,11 +1,15 @@
 package models;
 
-public class Entry {
+public class Entry extends Kingdom {
     private String commonName;
-    private int id;
+    private String phylum;
+    private int kingdomId;
+    private int entryId;
 
-    public Entry(String commonName) {
+    public Entry(String kingdomName, String commonName, String phylum) {
+        super(kingdomName);
         this.commonName = commonName;
+        this.phylum = phylum;
     }
 
     // getters and setters
@@ -18,16 +22,31 @@ public class Entry {
         this.commonName = commonName;
     }
 
-    public int getId() {
-        return id;
+    public String getPhylum() {
+        return phylum;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setPhylum(String phylum) {
+        this.phylum = phylum;
     }
 
+    public int getKingdomId() {
+        return kingdomId;
+    }
 
-    // equals and hashcode
+    public void setKingdomId(int kingdomId) {
+        this.kingdomId = kingdomId;
+    }
+
+    public int getEntryId() {
+        return entryId;
+    }
+
+    public void setEntryId(int entryId) {
+        this.entryId = entryId;
+    }
+
+// equals and hashcode
 
 
     @Override
@@ -37,14 +56,14 @@ public class Entry {
 
         Entry entry = (Entry) o;
 
-        if (id != entry.id) return false;
-        return commonName.equals(entry.commonName);
+        if (!commonName.equals(entry.commonName)) return false;
+        return phylum.equals(entry.phylum);
     }
 
     @Override
     public int hashCode() {
         int result = commonName.hashCode();
-        result = 31 * result + id;
+        result = 31 * result + phylum.hashCode();
         return result;
     }
 }

@@ -38,7 +38,7 @@ public class Sql2oPersonalNotesDaoTest {
         assertEquals(1, testPersonalNotes.getId());
     }
 
-    @Test
+        @Test
     public void existingPersonalNotesCanBeFoundById() throws Exception {
         PersonalNotes review = setupNewPersonalNotes();
         personalNotesDao.add(review);
@@ -69,23 +69,24 @@ public class Sql2oPersonalNotesDaoTest {
     @Test
     public void getAllPersonalNotesForAnEntry() throws Exception {
         Entry testEntry = setupEntry();
-        PersonalNotes testPersonalNotes = setupNewPersonalNotes();
         entryDao.add(testEntry);
+        PersonalNotes testPersonalNotes = setupNewPersonalNotes();
         personalNotesDao.add(testPersonalNotes);
-        entryDao.addEntryToPersonalNotes(testPersonalNotes, testEntry);
-        assertEquals(1, entryDao.getAllPersonalNotesForAnEntry(1).size());
+        entryDao.addPersonalNotesToEntry(testPersonalNotes, testEntry);
+        assertEquals(1, entryDao.getAllPersonalNotesForAnEntry(testPersonalNotes.getId()).size());
     }
 
     //helpers
-    public PersonalNotes setupNewPersonalNotes(){
-        return new PersonalNotes("Written By", 5 , 4, "Note Contents");
+    public PersonalNotes setupNewPersonalNotes() {
+        return new PersonalNotes("Animalia", "Pat Boone", "Note Contents");
     }
 
-    public PersonalNotes setupAltPersonalNotes(){
-        return new PersonalNotes("Not Written By", 4, 5,"Not Note Contents");
+    public PersonalNotes setupAltPersonalNotes() {
+        return new PersonalNotes("Plantae", "Pat Boone", "Plantae Note Contents");
     }
 
     public Entry setupEntry() {
-        return new Entry ("chicken");
+        return new Entry("Protozoa", "Amoebae", "Dictyozoa");
+//    }
     }
 }

@@ -2,16 +2,20 @@ package dao;
 
 import models.Entry;
 import models.Kingdom;
+import models.PersonalNotes;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.sql2o.Connection;
 import org.sql2o.Sql2o;
 
+import java.util.Arrays;
+
 import static org.junit.Assert.*;
 
 public class Sql2oEntryDaoTest {
     private Sql2oKingdomDao kingdomDao;
+    private Sql2oPersonalNotesDao personalNotesDao;
     private Sql2oEntryDao entryDao;
     private Connection conn;
 
@@ -32,9 +36,9 @@ public class Sql2oEntryDaoTest {
     @Test
     public void addingEntrySetsId() throws Exception {
         Entry testEntry = setupNewEntry();
-        int originalEntryId = testEntry.getId();
+        int originalEntryId = testEntry.getEntryId();
         entryDao.add(testEntry);
-        assertNotEquals(originalEntryId,testEntry.getId());
+        assertNotEquals(originalEntryId,testEntry.getEntryId());
     }
 
     @Test
@@ -51,9 +55,9 @@ public class Sql2oEntryDaoTest {
 
     @Test
     public void deleteByIdDeletesCorrectEntry() throws Exception {
-        Entry foodtype = setupNewEntry();
-        entryDao.add(foodtype);
-        entryDao.deleteById(foodtype.getId());
+        Entry testEntry = setupNewEntry();
+        entryDao.add(testEntry);
+        entryDao.deleteById(testEntry.getEntryId());
         assertEquals(0, entryDao.getAll().size());
     }
 
@@ -61,40 +65,47 @@ public class Sql2oEntryDaoTest {
     public void findById_findCorrectEntry() throws Exception {
         Entry entry = setupNewEntry();
         entryDao.add(entry);
-        Entry foundEntry = entryDao.findById(entry.getId());
+        Entry foundEntry = entryDao.findById(entry.getEntryId());
         assertEquals(entry, foundEntry);
     }
 
     @Test
-    public void addEntryToKingdomAddsCorrectly() throws Exception {
-
-        Kingdom testKingdom = setupKingdom();
-        Kingdom altKingdom = setupAltKingdom();
-
-        kingdomDao.add(testKingdom);
-        kingdomDao.add(altKingdom);
-
-        Entry testEntry = setupNewEntry();
-
-        entryDao.add(testEntry);
-
-        entryDao.addEntryToKingdom(testKingdom, testEntry);
-        entryDao.addEntryToKingdom(altKingdom, testEntry);
-
-        assertEquals(2, entryDao.getAllKingdomsForAnEntry(testEntry.getId()).size());
+    public void kingdomIdIsReturnedCorrectly() throws Exception {
+        Entry entry = setupNewEntry();
+        int originalId = entry.getKingdomId();
+        entryDao.add(entry);
+        assertEquals(originalId, entryDao.findById(entry.getEntryId()).getKingdomId());
     }
 
+
+
+
+
+
+//    @Test
+//    public void getAllPersonalNotesForAnEntryReturnsCorrectly() throws Exception {
+//        PersonalNotes newPersonalNotes  = newPersonalNotes();
+//        personalNotesDao.add(newPersonalNotes);
+//
+//        PersonalNotes otherPersonalNotes  = newPersonalNotes();
+//        personalNotesDao.add(otherPersonalNotes);
+//
+//        Entry testEntry = setupNewEntry();
+//        entryDao.add(testEntry);
+//        entryDao.addPersonalNotesToEntry(testEntry, newPersonalNotes);
+//        entryDao.addPersonalNotesToEntry(testEntry, otherPersonalNotes);
+//
+//        PersonalNotes[] students = {newPersonalNotes, otherPersonalNotes};
+//
+//        assertEquals(entryDao.getAllPersonalNotesForAnEntry(testEntry.getEntryId()), Arrays.asList(students));
+//    }
 
     // helpers
     public Entry setupNewEntry(){
-        return new Entry("chicken");
+        return new Entry("Animalia","chicken", "Chordata" );
     }
 
-    public Kingdom setupKingdom (){
-        return new Kingdom("Animalia");
-    }
-
-    public Kingdom setupAltKingdom (){
-        return new Kingdom("Plantae");
+    public PersonalNotes newPersonalNotes() {
+        return new PersonalNotes("Plantae", "Pat Boone", "Life is amazing");
     }
 }

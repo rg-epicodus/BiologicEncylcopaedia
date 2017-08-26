@@ -24,7 +24,7 @@ public class Sql2oKingdomDao implements KingdomDao {
                     .bind(kingdom)
                     .executeUpdate()
                     .getKey();
-            kingdom.setId(id);
+            kingdom.setOrganismId(id);
         } catch (Sql2oException ex) {
             System.out.println(ex);
         }
@@ -39,37 +39,33 @@ public class Sql2oKingdomDao implements KingdomDao {
     }
 
     @Override
-    public void deleteById(int id) {
-        String sql = "DELETE from kingdom WHERE id = :id";
-//        String deletejoin = "DELETE from kingdom_entry WHERE kingdomid = :kingdomId";
+    public void deleteById(int organismId) {
+        String sql = "DELETE from kingdom WHERE organismId = :organismId";
         try (Connection con = sql2o.open()){
             con.createQuery(sql)
-                    .addParameter("id", id)
+                    .addParameter("organismId", organismId)
                     .executeUpdate();
-//            con.createQuery(deletejoin)
-//                    .addParameter("kigndomId", id)
-//                    .executeUpdate();
         } catch (Sql2oException ex){
             System.out.println(ex);
         }
     }
 
     @Override
-    public Kingdom findById(int id) {
+    public Kingdom findById(int organismId) {
         try (Connection con = sql2o.open()) {
-            return con.createQuery("SELECT * FROM kingdom WHERE id = :id")
-                    .addParameter("id", id)
+            return con.createQuery("SELECT * FROM kingdom WHERE organismId = :organismId")
+                    .addParameter("organismId", organismId)
                     .executeAndFetchFirst(Kingdom.class);
         }
     }
 
     @Override
-    public void update(int id, String kingdomName){
-        String sql = "UPDATE kingdom SET (kingdomName) = (:kingdomName) WHERE id = :id";
+    public void update(int organismId, String newKingdomName){
+        String sql = "UPDATE kingdom SET (kingdomName) = (:kingdomName) WHERE organismId = :organismId";
         try (Connection con = sql2o.open()){
             con.createQuery(sql)
-                    .addParameter("kingdomName", kingdomName)
-                    .addParameter("id", id)
+                    .addParameter("kingdomName", newKingdomName)
+                    .addParameter("organismId", organismId)
                     .executeUpdate();
         } catch (Sql2oException ex){
             System.out.println(ex);
@@ -87,39 +83,39 @@ public class Sql2oKingdomDao implements KingdomDao {
         }
     }
 
-    @Override
-    public List<Entry> getAllEntriesForAKingdom(int kingdomId) {
-        ArrayList<Entry> entries = new ArrayList<>();
-        String joinQuery = "SELECT entryId FROM kingdom_entry WHERE kingdomId = :kingdomId";
-        try (Connection con = sql2o.open()) {
-            List<Integer> allEntrysIds = con.createQuery(joinQuery)
-                    .addParameter("kingdomId", kingdomId)
-                    .executeAndFetch(Integer.class);
-            for (Integer entryId : allEntrysIds) {
-                String entryQuery = "SELECT * FROM entry WHERE id = :entryId";
-                entries.add(
-                        con.createQuery(entryQuery)
-                                .addParameter("entryId", entryId)
-                                .executeAndFetchFirst(Entry.class));
-            }
-        } catch (Sql2oException ex) {
-            System.out.println(ex);
-        }
-        return entries;
-    }
-
-    @Override
-    public void addKingdomToEntry(Kingdom kingdom, Entry entry) {
-        String sql = "INSERT INTO kingdom_entry (kingdomId, entryId) VALUES (:kingdomId, :entryId)";
-        try(Connection con = sql2o.open()) {
-            con.createQuery(sql)
-                    .addParameter("kingdomId", kingdom.getId())
-                    .addParameter("entryId", entry.getId())
-                    .executeUpdate();
-        } catch (Sql2oException ex){
-            System.out.println(ex);
-        }
-    }
+//    @Override
+//    public List<Entry> getAllEntriesForAKingdom(int kingdomId) {
+//        ArrayList<Entry> entries = new ArrayList<>();
+//        String joinQuery = "SELECT entryId FROM kingdom_entry WHERE kingdomId = :kingdomId";
+//        try (Connection con = sql2o.open()) {
+//            List<Integer> allEntrysIds = con.createQuery(joinQuery)
+//                    .addParameter("kingdomId", kingdomId)
+//                    .executeAndFetch(Integer.class);
+//            for (Integer entryId : allEntrysIds) {
+//                String entryQuery = "SELECT * FROM entry WHERE id = :entryId";
+//                entries.add(
+//                        con.createQuery(entryQuery)
+//                                .addParameter("entryId", entryId)
+//                                .executeAndFetchFirst(Entry.class));
+//            }
+//        } catch (Sql2oException ex) {
+//            System.out.println(ex);
+//        }
+//        return entries;
+//    }
+//
+//    @Override
+//    public void addKingdomToEntry(Kingdom kingdom, Entry entry) {
+//        String sql = "INSERT INTO kingdom_entry (kingdomId, entryId) VALUES (:kingdomId, :entryId)";
+//        try(Connection con = sql2o.open()) {
+//            con.createQuery(sql)
+//                    .addParameter("kingdomId", kingdom.getOrganismId())
+//                    .addParameter("entryId", entry.getOrganismId())
+//                    .executeUpdate();
+//        } catch (Sql2oException ex){
+//            System.out.println(ex);
+//        }
+//    }
 
 
 }

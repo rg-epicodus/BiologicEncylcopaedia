@@ -10,17 +10,18 @@ public interface KingdomDao {
 
     //Create
     void add(Kingdom kingdom);
-    void addKingdomToEntry(Kingdom kingdom, Entry entry);
-
-    //Read
+////    void addKingdomToEntry(Kingdom kingdom, Entry entry);
+//    void addEntryToKingdom(Kingdom kingdom, Entry entry);
+//
+//    //Read
+//    List<Entry> getAllEntriesForAKingdom(int entryId);
     List<Kingdom> getAll();
-    Kingdom findById(int id);
-    List<Entry> getAllEntriesForAKingdom(int kingdomId);
-
-    //Update
-    void update(int id, String newKingdom);
-
-    //Destroy
-    void deleteById(int id);
+    Kingdom findById(int organismId);
+//
+//    //Update
+    void update(int organismId, String newKingdomName);
+//
+//    //Destroy
+    void deleteById(int oraganismId);
     void clearAllKingdoms();
 }

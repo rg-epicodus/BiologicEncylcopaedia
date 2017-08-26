@@ -8,20 +8,18 @@ import java.util.List;
 
 public interface EntryDao {
 
-    //create
+//    //create
     void add(Entry entry);
-    void addEntryToKingdom(Kingdom kingdom, Entry entry);
-    void addEntryToPersonalNotes(PersonalNotes personalNotes, Entry entry);
-
-
-    //read
-    List<Entry> getAll();
+    void addPersonalNotesToEntry(PersonalNotes personalNotes, Entry entry);
+//
+//    //read
     Entry findById(int id);
-    List<Kingdom> getAllKingdomsForAnEntry(int id);
-    List<PersonalNotes> getAllPersonalNotesForAnEntry(int id);
-
-    //update
-
-    //destroy
-    void deleteById(int id);
+    List<Entry> getAll();
+//    List<Entry> getAllKingdomsForAnEntry(int kingdomId);
+    List<PersonalNotes> getAllPersonalNotesForAnEntry(int personalNotesId);
+//
+//    //update
+//    void update(int entryId, String commonName, String phylum);
+//    //destroy
+    void deleteById(int entryId);
 }

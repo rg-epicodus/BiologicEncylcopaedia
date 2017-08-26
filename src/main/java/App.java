@@ -27,25 +27,25 @@ public class App {
         kingdomDao = new Sql2oKingdomDao(sql2o);
         conn = sql2o.open();
 
-        // creates a new entry into DB
-        post("/kingdom/new", "application/json", (req,res) ->{
-            Kingdom kingdom = gson.fromJson(req.body(), Kingdom.class);
-            kingdomDao.add(kingdom);
-            res.status(201);
-            return gson.toJson(kingdom);
-        });
-
-        get("/kingdom", "application/json", (req, res)->{
-            return gson.toJson(kingdomDao.getAll());
-        });
-
-        get("/kingdom/:id", "application/json", (req, res) -> {
-            int kingdomId = Integer.parseInt(req.params("id"));
-            Kingdom kingdom = kingdomDao.findById(kingdomId);
-            if (kingdom == null) {
-                throw new ApiException(String.format("No location with the id '%d' found", kingdomId), 404);
-            } return gson.toJson(kingdom);
-        });
+//        // creates a new entry into DB
+//        post("/kingdom/new", "application/json", (req,res) ->{
+//            Kingdom kingdom = gson.fromJson(req.body(), Kingdom.class);
+//            kingdomDao.add(kingdom);
+//            res.status(201);
+//            return gson.toJson(kingdom);
+//        });
+//
+//        get("/kingdom", "application/json", (req, res)->{
+//            return gson.toJson(kingdomDao.getAll());
+//        });
+//
+//        get("/kingdom/:id", "application/json", (req, res) -> {
+//            int kingdomId = Integer.parseInt(req.params("id"));
+//            Kingdom kingdom = kingdomDao.findById(kingdomId);
+//            if (kingdom == null) {
+//                throw new ApiException(String.format("No location with the id '%d' found", kingdomId), 404);
+//            } return gson.toJson(kingdom);
+//        });
 
 
 
