@@ -42,6 +42,14 @@ public class Sql2oKingdomDaoTest {
     }
 
     @Test
+    public void findById_findCorrectKindom() throws Exception {
+        Kingdom kingdom = setupKingdom();
+        kingdomDao.add(kingdom);
+        Kingdom foundKingdom = kingdomDao.findById(kingdom.getOrganismId());
+        assertEquals(kingdom, foundKingdom);
+    }
+
+    @Test
     public void addedKingdomsAreReturnedFromGetAll() throws Exception {
         Kingdom testKingdom = setupKingdom();
         kingdomDao.add(testKingdom);
@@ -54,22 +62,6 @@ public class Sql2oKingdomDaoTest {
     }
 
     @Test
-    public void deleteByIdDeletesCorrectKingdom() throws Exception {
-        Kingdom testKingdom = setupKingdom();
-        kingdomDao.add(testKingdom);
-        kingdomDao.deleteById(testKingdom.getOrganismId());
-        assertEquals(0, kingdomDao.getAll().size());
-    }
-
-    @Test
-    public void findById_findCorrectKindom() throws Exception {
-        Kingdom kingdom = setupKingdom();
-        kingdomDao.add(kingdom);
-        Kingdom foundKingdom = kingdomDao.findById(kingdom.getOrganismId());
-        assertEquals(kingdom, foundKingdom);
-    }
-
-    @Test
     public void updateKingdomInformation() throws Exception {
         Kingdom kingdom = setupKingdom();
         kingdomDao.add(kingdom);
@@ -77,6 +69,16 @@ public class Sql2oKingdomDaoTest {
         Kingdom updateLocation = kingdomDao.findById(kingdom.getOrganismId());
         assertNotEquals(kingdom, updateLocation.getKingdomName());
     }
+
+    @Test
+    public void deleteByIdDeletesCorrectKingdom() throws Exception {
+        Kingdom testKingdom = setupKingdom();
+        kingdomDao.add(testKingdom);
+        kingdomDao.deleteById(testKingdom.getOrganismId());
+        assertEquals(0, kingdomDao.getAll().size());
+    }
+
+
 
     @Test
     public void clearAllKingdomsClearsAllKingdoms() throws Exception {
@@ -89,19 +91,23 @@ public class Sql2oKingdomDaoTest {
         assertTrue(daoSize > 0 && daoSize >kingdomDao.getAll().size());
     }
 
-//    @Test
-//    public void getAllEntriesForAKingdomReturnsEntriesCorrectly() throws Exception {
-//        Entry testEntry  = new Entry("entryOne");
-//        entryDao.add(testEntry);
-//        Entry otherEntry  = new Entry("entryTwo");
-//        entryDao.add(otherEntry);
-//        Kingdom testKingdom = setupKingdom();
-//        kingdomDao.add(testKingdom);
-//        kingdomDao.addKingdomToEntry(testKingdom,testEntry);
-//        kingdomDao.addKingdomToEntry(testKingdom,otherEntry);
-//        Entry[] entry = {testEntry, otherEntry};
-//        assertEquals(kingdomDao.getAllEntriesForAKingdom(testKingdom.getOrganismId()), Arrays.asList(entry));
-//    }
+    @Test
+    public void getAllEntriesForAKingdomReturnsEntriesCorrectly() throws Exception {
+        Entry testEntry  = newEntry();
+        entryDao.add(testEntry);
+
+        Entry otherEntry  = newAltEntry();
+        entryDao.add(otherEntry);
+
+        Kingdom testKingdom = setupKingdom();
+        kingdomDao.add(testKingdom);
+        kingdomDao.addEntryToKingdom(testKingdom,testEntry);
+        kingdomDao.addEntryToKingdom(testKingdom,otherEntry);
+
+        Entry[] entry = {testEntry, otherEntry};
+
+        assertEquals(kingdomDao.getAllEntriesForAKingdom(testKingdom.getOrganismId()), Arrays.asList(entry));
+    }
 
         // helpers
 
@@ -113,5 +119,12 @@ public class Sql2oKingdomDaoTest {
         return new Kingdom("Plantae");
     }
 
+    public Entry newEntry() {
+        return new Entry("entryOne", "common name", "blah blah");
+    }
+
+    public Entry newAltEntry() {
+        return new Entry("entryTwo", "uncommon name", "blah and blah");
+    }
 
 }

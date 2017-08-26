@@ -5,6 +5,12 @@ CREATE TABLE IF NOT EXISTS kingdom (
  kingdomName VARCHAR,
 );
 
+CREATE TABLE IF NOT EXISTS personalNotes (
+ id int PRIMARY KEY auto_increment,
+ writtenBy VARCHAR,
+ content VARCHAR,
+);
+
 CREATE TABLE IF NOT EXISTS entry (
  entryId int PRIMARY KEY auto_increment,
  commonName VARCHAR,
@@ -12,15 +18,9 @@ CREATE TABLE IF NOT EXISTS entry (
  kingdomId INTEGER,
 );
 
-CREATE TABLE IF NOT EXISTS personalNotes (
- id int PRIMARY KEY auto_increment,
- writtenBy VARCHAR,
- content VARCHAR,
-);
-
-CREATE TABLE IF NOT EXISTS entry_personalNotes (
+CREATE TABLE IF NOT EXISTS kingdom_personalNotes (
  id int PRIMARY KEY auto_increment,
  kingdomId INTEGER,
- entryId INTEGER,
  personalNotesId INTEGER,
+ entryId INTEGER,
 );

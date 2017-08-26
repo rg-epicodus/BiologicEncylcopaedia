@@ -15,10 +15,6 @@ public class Kingdom {
         return kingdomName;
     }
 
-    public void setKingdomName(String kingdomName) {
-        this.kingdomName = kingdomName;
-    }
-
     public int getOrganismId() {
         return organismId;
     }
@@ -38,14 +34,12 @@ public class Kingdom {
 
         Kingdom kingdom = (Kingdom) o;
 
-        if (organismId != kingdom.organismId) return false;
         return kingdomName.equals(kingdom.kingdomName);
     }
 
     @Override
     public int hashCode() {
         int result = kingdomName.hashCode();
-        result = 31 * result + organismId;
         return result;
     }
 }

@@ -38,18 +38,18 @@ public class Sql2oPersonalNotesDaoTest {
         assertEquals(1, testPersonalNotes.getId());
     }
 
-        @Test
+    @Test
     public void existingPersonalNotesCanBeFoundById() throws Exception {
-        PersonalNotes review = setupNewPersonalNotes();
-        personalNotesDao.add(review);
-        PersonalNotes foundPersonalNotes = personalNotesDao.findById(review.getId());
-        assertEquals(review, foundPersonalNotes);
+        PersonalNotes testNotes = setupNewPersonalNotes();
+        personalNotesDao.add(testNotes);
+        PersonalNotes foundPersonalNotes = personalNotesDao.findById(testNotes.getId());
+        assertEquals(testNotes, foundPersonalNotes);
     }
 
     @Test
     public void returnAllPersonalNotes() throws Exception {
-        PersonalNotes review = setupNewPersonalNotes();
-        personalNotesDao.add(review);
+        PersonalNotes testNotes = setupNewPersonalNotes();
+        personalNotesDao.add(testNotes);
         assertEquals(1, personalNotesDao.getAll().size());
     }
 
@@ -60,21 +60,49 @@ public class Sql2oPersonalNotesDaoTest {
 
     @Test
     public void deleteByIdDeletesCorrectPersonalNotes() throws Exception {
-        PersonalNotes review = setupNewPersonalNotes();
-        personalNotesDao.add(review);
-        personalNotesDao.deletePersonalNotesById(review.getId());
+        PersonalNotes testNotes = setupNewPersonalNotes();
+        personalNotesDao.add(testNotes);
+        personalNotesDao.deletePersonalNotesById(testNotes.getId());
         assertEquals(0, personalNotesDao.getAll().size());
     }
 
     @Test
-    public void getAllPersonalNotesForAnEntry() throws Exception {
-        Entry testEntry = setupEntry();
-        entryDao.add(testEntry);
-        PersonalNotes testPersonalNotes = setupNewPersonalNotes();
-        personalNotesDao.add(testPersonalNotes);
-        entryDao.addPersonalNotesToEntry(testPersonalNotes, testEntry);
-        assertEquals(1, entryDao.getAllPersonalNotesForAnEntry(testPersonalNotes.getId()).size());
+    public void clearAllPersonalNotes() throws Exception {
+        PersonalNotes personalNotes = setupNewPersonalNotes();
+        PersonalNotes personalNotes2 = setupAltPersonalNotes();
+        personalNotesDao.add(personalNotes);
+        personalNotesDao.add(personalNotes2);
+        int daoSize = personalNotesDao.getAll().size();
+        personalNotesDao.clearAllPersonalNotes();
+        assertTrue(daoSize > 0 && daoSize >personalNotesDao.getAll().size());
+
     }
+
+    @Test
+    public void update() throws Exception {
+        PersonalNotes personalNotes = setupNewPersonalNotes();
+        personalNotesDao.add(personalNotes);
+        personalNotesDao.update("Willie Wonka", "This chicken had feathers", personalNotes.getId());
+        PersonalNotes updatedPersonalNotes = personalNotesDao.findById(personalNotes.getId());
+        assertEquals("Willie Wonka", updatedPersonalNotes.getWrittenBy());
+        assertEquals("This chicken had feathers", updatedPersonalNotes.getContent());
+    }
+
+
+
+//    @Test
+//    public void getAllPersonalNotesForAnEntry() throws Exception {
+//        PersonalNotes testPersonalNotes = setupNewPersonalNotes();
+//        personalNotesDao.add(testPersonalNotes);
+//        PersonalNotes testOtherPersonalNotes = setupAltPersonalNotes();
+//        personalNotesDao.add(testOtherPersonalNotes);
+//        Entry testEntry = setupEntry();
+//        entryDao.add(testEntry);
+//        entryDao.addPersonalNotesToEntry(testPersonalNotes, testEntry);
+//        entryDao.addPersonalNotesToEntry(testOtherPersonalNotes, testEntry);
+//        PersonalNotes[] personalNotes = {testPersonalNotes, testOtherPersonalNotes};
+//        assertEquals(entryDao.getAllPersonalNotesForAnEntry(testEntry.getEntryId()), Arrays.asList(personalNotes));
+//    }
 
     //helpers
     public PersonalNotes setupNewPersonalNotes() {
